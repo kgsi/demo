@@ -5,12 +5,12 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && npm run build-storybook",
     "preview": "astro preview",
     "astro": "astro",
     "lint:html": "markuplint \"src/**/*.astro\"",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build -o dist/_storybook"
   },
   "dependencies": {
     "@astrojs/image": "^0.15.1",
