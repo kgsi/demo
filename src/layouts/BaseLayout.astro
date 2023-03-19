@@ -1,0 +1,63 @@
+---
+import { SEO } from 'astro-seo'
+import GlobalHeader from '../components/GlobalHeader.astro'
+import GlobalFooter from '../components/GlobalFooter.astro'
+import GlobalStyle from '../components/GlobalStyle.astro'
+
+export interface Props {
+  title: string
+  description: string
+  current: 'index' | 'company' | 'services' | 'recruit' | 'contact'
+}
+
+const { title, description, current } = Astro.props
+---
+
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <SEO
+      charset="UTF-8"
+      description={description}
+      openGraph={{
+        basic: {
+          title: title,
+          type: `${current === 'index' ? 'website' : 'article'}`,
+          image: 'https://xxx.com/ogimage.png',
+        },
+        image: {
+          alt: 'Sample Website Design - Powered by Coloso',
+        },
+      }}
+      extend={{
+        link: [
+          { rel: 'icon', href: '/favicon.ico' },
+          { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml' },
+          { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' },
+          { rel: 'manifest', href: '/site.webmanifest' },
+        ],
+        meta: [
+          { name: 'viewport', content: 'width=device-width' },
+          { name: 'generator', content: Astro.generator },
+          { name: 'theme-color"', content: '#4a4a4a' },
+        ],
+      }}
+    />
+    <title>{title}</title>
+    <GlobalStyle />
+  </head>
+  <body>
+    <GlobalHeader current={current} />
+    <div class="container">
+      <slot />
+    </div>
+    <GlobalFooter />
+    <style>
+      .container {
+        max-inline-size: var(--container-width);
+        padding-inline: var(--container-margin);
+        line-height: var(--line-height-normal);
+      }
+    </style>
+  </body>
+</html>
